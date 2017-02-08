@@ -10,8 +10,8 @@ class awsTest {
     this.params = params || {}
     this.handler = handler || function (event,ctx,cb) {
       cb(null,{})
-    }
-    (typeof cb === 'function') && (this._cb = cb)
+    };
+    typeof cb === 'function' && (this._cb = cb)
   }
   exec (params, callback) {
     if(typeof this.handler !== 'function' || this.handler.called) return Promise.resolve()
@@ -53,12 +53,6 @@ class awsTest {
           done(error, null)
         }
       }
-      // timeout to reject the promise if timeout var is broken
-      setTimeout(function () {
-        if(self.called) return
-        let error =  new Error('TimeOut of ' + self.timeout + ' is broken' )
-        cb(error, null)
-      }, self.timeout);
       // exec the handler
       try {
         self.handler.call(self.ctx, self.params, ctx, cb)
@@ -83,9 +77,5 @@ class awsTest {
     this.ctx = ctx
     return this
   }
- setTimeout(timeout){
-   this.timeout = timeout
-   return this
- }
 }
 module.exports = awsTest

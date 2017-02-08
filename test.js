@@ -110,7 +110,7 @@ describe('The test to aws-tester', function () {
 
   it('should change the time out', function (done) {
     awsTest
-    .setTimeout(4000)
+    .timeout(4000)
     .addHandler(function (params, ctx, callback) {
       let timeout = setTimeout(function () {
         callback(null,{})
