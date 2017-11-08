@@ -4,11 +4,11 @@ const timeOutDefault = 3000;
 class awsTest extends Timeout {
     constructor(handler, params, cb, ctx) {
         super();
-        if (handler) this.setHandler(handler);
+        this.setHandler(handler);
         this.ctx = ctx || {};
         this.params = params || {};
         this.timeout = timeOutDefault;
-        this.init = NaN;
+        this._init = NaN;
         this._memoryUsageLimit = Infinity
         if (typeof cb === 'function') this._cb = cb;
     }
