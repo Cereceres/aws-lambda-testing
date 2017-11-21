@@ -1,14 +1,3 @@
 language: node_js
 
 node_js: 7
-
-services:
-  - mongodb
-
-notifications:
-  slack: '4yopping:ALhrivGHquJzo5MPODfnRIvI'
-
-script: npm test
-
-after_success:
-  - source ./tasks/deploy.sh
