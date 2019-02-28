@@ -1,15 +1,14 @@
 
 const assert = require('assert');
 const AwsTest = require('../index');
-const awsTest = new AwsTest((params, ctx, cb) => {
+const awsTest = new AwsTest(async (params, ctx) => {
     assert(ctx.getRemainingTimeInMillis() > 27000);
     assert(params.test === 'test');
     assert(typeof ctx.getRemainingTimeInMillis === 'function');
     assert(typeof ctx.done === 'function');
     assert(typeof ctx.fail === 'function');
     assert(typeof ctx.succeed === 'function');
-    assert(typeof cb === 'function');
-    ctx.done(null, 'test');
+    return 'test'
 });
 awsTest.setTimeout(30000);
 
@@ -101,6 +100,7 @@ describe('The test to aws-tester with promise', () => {
         .exec(null)
         .catch((err) => {
             assert(err.message === 'timeout 40 broken')
+
         }));
 });
 
