@@ -15,14 +15,14 @@ awsTest.setTimeout(30000);
 
 
 describe('test memory usage', () => {
-    it('should return the memory usage', async() => {
+    it('should return the memory usage', async () => {
         await awsTest
             .setHandler((params, ctx) => ctx.done(null, params))
             .exec({});
         assert(awsTest.getMemoryUsage() > 0);
     });
 
-    it('should throw a erros if memory usage is over limit', async() => {
+    it('should throw a erros if memory usage is over limit', async () => {
         awsTest.setMemoryUsageLimit(0.1);
         awsTest.setTimeout(10000);
         const { error } = await awsTest.setHandler((params, ctx) => {
@@ -33,7 +33,6 @@ describe('test memory usage', () => {
         })
             .exec({})
             .catch((error) => ({ error }));
-
-        assert(error.message === 'Memory usage is over limit');
+        assert(error.message === 'Memory usage 0.1 is over limit');
     });
 });

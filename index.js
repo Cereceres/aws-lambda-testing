@@ -3,6 +3,7 @@ const timeOutDefault = 3000;
 const AWS = require('aws-sdk');
 const defaultName = 'AWS_LAMBDA_TESTING';
 const _sts = new AWS.STS();
+const defaultMemoryUsageLimit = 128
 class awsTest extends Timeout {
     constructor(handler, params, cb, ctx) {
         super();
@@ -11,7 +12,7 @@ class awsTest extends Timeout {
         this.params = params || {};
         this.timeout = timeOutDefault;
         this._init = NaN;
-        this._memoryUsageLimit = 128;
+        this._memoryUsageLimit = defaultMemoryUsageLimit;
         if (typeof cb === 'function') this._cb = cb;
     }
     getRemainingTimeInMillis() {
